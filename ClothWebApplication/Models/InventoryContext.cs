@@ -23,7 +23,7 @@ public partial class InventoryContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=MSI\\SQLEXPRESS;Database=Inventory;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-QBL2I9C\\SQLEXPRESS;Database=Inventory;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -51,10 +51,8 @@ public partial class InventoryContext : DbContext
             entity.Property(e => e.HasHood).HasColumnName("_hasHood");
             entity.Property(e => e.Image).HasColumnName("_image");
             entity.Property(e => e.Inventory).HasColumnName("_inventory");
-            entity.Property(e => e.JacketSize).HasColumnName("_jacketSize");
-            entity.Property(e => e.PantsSize).HasColumnName("_pantsSize");
+            entity.Property(e => e.Size).HasColumnName("_size");
             entity.Property(e => e.Price).HasColumnName("_price");
-            entity.Property(e => e.TshirtSize).HasColumnName("_tshirtSize");
             entity.Property(e => e.WaistSize).HasColumnName("_waistSize");
 
             entity.HasOne(d => d.BrandBrand).WithMany(p => p.Clothes)

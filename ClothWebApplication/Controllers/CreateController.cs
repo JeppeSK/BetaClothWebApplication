@@ -1,6 +1,7 @@
 ﻿using ClothWebApplication.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ClothWebApplication.Controllers
 {
@@ -25,13 +26,34 @@ namespace ClothWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateModel(Cloth cloth)
+        public IActionResult CreateModel()
         {
 
             InventoryContext inventory = new InventoryContext();
+            
+            CreationViewModel viewModel = new CreationViewModel();
 
-            inventory.Clothes.Add(cloth);
-            inventory.SaveChanges();
+            Brand brand = new Brand();
+            Cloth cloth = new Cloth();
+
+            if (viewModel.Clothmodel.Discriminator.Equals("Tshirt"))
+            {
+                cloth.Discriminator = viewModel.Clothmodel.Discriminator.ToString();
+                cloth.Color = viewModel.Clothmodel.ToString();
+                cloth.Size = viewModel.Clothmodel.ToString();
+                cloth.Fabric = viewModel.Clothmodel.ToString();
+                cloth.Inventory = Convert.ToInt32(viewModel.Clothmodel.Inventory.ToString());
+                cloth.Price = Convert.ToInt32(viewModel.Clothmodel.Price.ToString());
+
+                brand = (from b in inventory.Brands
+                         where b.BrandName.Equals(viewModel.Clothmodel.BrandBrand.BrandName.ToString())
+                         select b).FirstOrDefault();
+
+                cloth.BrandBrand = brand;
+
+                inventory.Clothes.Add(cloth);
+                inventory.SaveChanges();
+            }
 
             return View("Index");
         }

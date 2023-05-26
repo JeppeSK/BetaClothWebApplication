@@ -27,47 +27,47 @@
 
                     <div class="mb-3">
                         <label class="form-label">Model</label>
-                        <select asp-for=Cloth.Discriminator class="form-select" asp-items="@Model.Model">
+                        <select asp-for=Clothmodel.Discriminator class="form-select" asp-items="@Model.Model">
                             <option value="">--Select--</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Brand</label>
-                        <select asp-for=Cloth.BrandBrandId class="form-select" asp-items="@Model.BrandsSelectList">
+                        <select asp-for=Clothmodel.BrandBrandId class="form-select" asp-items="@Model.BrandsSelectList">
                             <option value="">--Select--</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Size</label>
-                        <select asp-for=Cloth.TshirtSize class="form-select" asp-items="@Model.Size">
+                        <select asp-for=Clothmodel.Size class="form-select" asp-items="@Model.Size">
                             <option value="">--Select--</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Color</label>
-                        <select asp-for=Cloth.Color class="form-select" asp-items="@Model.Color">
+                        <select asp-for=Clothmodel.Color class="form-select" asp-items="@Model.Color">
                             <option value="">--Select--</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Fabric</label>
-                        <select asp-for=Cloth.Fabric class="form-select" asp-items="@Model.Fabric">
+                        <select asp-for=Clothmodel.Fabric class="form-select" asp-items="@Model.Fabric">
                             <option value="">--Select--</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Inventory</label>
-                        <input asp-for=Cloth.Inventory type="number" class="form-control" />
+                        <input asp-for=Clothmodel.Inventory type="number" class="form-control" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Price</label>
-                        <input asp-for=Cloth.Price type="number" class="form-control" />
+                        <input asp-for=Clothmodel.Price type="number" class="form-control" />
                     </div>
 
                     <div class="mb-3">

@@ -23,11 +23,7 @@ public partial class Cloth
 
     public int? BrandBrandId { get; set; }
 
-    public string? JacketSize { get; set; }
-
-    public string? PantsSize { get; set; }
-
-    public string? TshirtSize { get; set; }
+    public string? Size { get; set; }
 
     public string? Image { get; set; }
 

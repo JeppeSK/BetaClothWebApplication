@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ClothWebApplication.ViewModels
 {
     public class CreationViewModel
     {
-        public virtual Cloth? Cloth { get; set; }
+        [BindProperty]
+        public Cloth Clothmodel { get; set; }
         public List<SelectListItem> Model { get; set; }
         public string Brandtype { get; set; }
 
