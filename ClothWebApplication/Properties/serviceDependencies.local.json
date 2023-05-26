@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql1": {
+      "secretStore": "LocalSecretsFile",
+      "type": "mssql.local",
+      "connectionId": "Server=(local)::SQLEXPRESS;Database=Inventory;Trusted_Connection=True;MultipleActiveResultSets=true",
+      "dynamicId": null
+    }
+  }
+}

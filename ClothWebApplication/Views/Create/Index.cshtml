@@ -1,0 +1,87 @@
+﻿@*@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model ClothWebApplication.ViewModels.CreationViewModel
+
+@{
+
+ }
+
+<h1>Create</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-6">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h5>Create a new Clothing Model</h5>
+            </div>
+
+            <div class="card-body">
+
+                <form asp-controller="Create" asp-action="CreateModel" method="post">
+
+                    <div class="mb-3">
+                        <label class="form-label">Model</label>
+                        <select asp-for=Cloth.Discriminator class="form-select" asp-items="@Model.Model">
+                            <option value="">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Brand</label>
+                        <select asp-for=Cloth.BrandBrandId class="form-select" asp-items="@Model.BrandsSelectList">
+                            <option value="">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Size</label>
+                        <select asp-for=Cloth.TshirtSize class="form-select" asp-items="@Model.Size">
+                            <option value="">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Color</label>
+                        <select asp-for=Cloth.Color class="form-select" asp-items="@Model.Color">
+                            <option value="">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Fabric</label>
+                        <select asp-for=Cloth.Fabric class="form-select" asp-items="@Model.Fabric">
+                            <option value="">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Inventory</label>
+                        <input asp-for=Cloth.Inventory type="number" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input asp-for=Cloth.Price type="number" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="card-footer">
+            </div>
+
+        </div>
+
+    </div>
+</div>

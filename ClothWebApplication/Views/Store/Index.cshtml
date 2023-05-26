@@ -1,0 +1,63 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<head>
+    <link rel="stylesheet" href="~/css/images.css" asp-append-version="true" />
+</head>
+
+<div class="Cloth-Container">
+@foreach (Cloth cloth in ViewBag.Clothes)
+{
+    if (cloth.Discriminator.Equals("Pants"))
+    {
+        <div class="Container-Item">
+            <img src="~/Images/ClothImages/Pants.png" class="Images" asp-append-version="true" />
+
+            <p>De helt nye Comosuit-pants til en lækker pris til kun @cloth.Price kr.</p>
+            
+            <a class="btn btn-primary mt-1" asp-area="">Add</a>
+            <br />
+        </div>
+    }
+
+    if (cloth.Discriminator.Equals("Jacket"))
+    {
+            <div class="Container-Item">
+            <img src="~/Images/ClothImages/Jacket.png" class="Images" asp-append-version="true" />
+
+            <p>Den helt nye jakke til en lækker pris til kun @cloth.Price kr.</p>
+
+            <a class="btn btn-primary mt-1" asp-area="">Add</a>
+            <br />
+        </div>
+    }
+
+    if (cloth.Discriminator.Equals("T_shirt"))
+    {
+            <div class="Container-Item">
+            <img src="~/Images/ClothImages/Shirt.png" class="Images" asp-append-version="true" />
+
+            <p>Den helt nye T-shirt til en lækker pris til kun @cloth.Price kr.</p>
+
+            <a class="btn btn-primary mt-1" asp-area="">Add</a>
+            <br />
+        </div>
+    }
+
+    if (cloth.Discriminator.Equals("Shoe"))
+    {
+            <div class="Container-Item">
+            <img src="~/Images/ClothImages/Shoe.png" class="Images" asp-append-version="true" />
+
+            <p>De helt nye sko til en lækker pris til kun @cloth.Price kr.</p>
+
+            <a class="btn btn-primary mt-1" asp-area="">Add</a>
+            <br />
+        </div>
+    }
+}
+</div>
