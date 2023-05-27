@@ -6,6 +6,13 @@ namespace ClothWebApplication.Controllers
     public class StoreController : Controller
     {
 
+        private readonly InventoryContext _inventoryContext;
+
+        public StoreController(InventoryContext inventoryContext) 
+        {
+            this._inventoryContext = inventoryContext;
+        }
+
         // GET: StoreController1
         public ActionResult Index()
         {

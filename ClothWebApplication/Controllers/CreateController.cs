@@ -7,6 +7,13 @@ namespace ClothWebApplication.Controllers
 {
     public class CreateController : Controller
     {
+
+        private readonly InventoryContext _inventoryContext;
+
+        public CreateController(InventoryContext invetory)
+        {
+            this._inventoryContext = invetory;
+        }
         public IActionResult Index()
         {
 
@@ -26,36 +33,32 @@ namespace ClothWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateModel()
+        public async Task<IActionResult> CreateModel(CreationViewModel addCloth)
         {
 
-            InventoryContext inventory = new InventoryContext();
-            
-            CreationViewModel viewModel = new CreationViewModel();
+            Brand? brand = (from b in _inventoryContext.Brands
+                           where b.BrandId == Convert.ToInt32(addCloth.SelectedBrand)
+                           select b).FirstOrDefault();
 
-            Brand brand = new Brand();
-            Cloth cloth = new Cloth();
-
-            if (viewModel.Clothmodel.Discriminator.Equals("Tshirt"))
+            var cloth = new Cloth()
             {
-                cloth.Discriminator = viewModel.Clothmodel.Discriminator.ToString();
-                cloth.Color = viewModel.Clothmodel.ToString();
-                cloth.Size = viewModel.Clothmodel.ToString();
-                cloth.Fabric = viewModel.Clothmodel.ToString();
-                cloth.Inventory = Convert.ToInt32(viewModel.Clothmodel.Inventory.ToString());
-                cloth.Price = Convert.ToInt32(viewModel.Clothmodel.Price.ToString());
+                Discriminator = addCloth.SelectedModel,
+                Color = addCloth.SelectedColor,
+                Fabric = addCloth.SelectedFabric,
+                HasHood = addCloth.HasHood,
+                Image = addCloth.Image,
+                Size = addCloth.SelectedSize,
+                WaistSize = addCloth.WaistSize,
+                Inventory = addCloth.Inventory,
+                Price = addCloth.Price,
+                BrandBrandId = Convert.ToInt32(addCloth.SelectedBrand),
+                BrandBrand = brand,
+            };
 
-                brand = (from b in inventory.Brands
-                         where b.BrandName.Equals(viewModel.Clothmodel.BrandBrand.BrandName.ToString())
-                         select b).FirstOrDefault();
+            await _inventoryContext.AddAsync(cloth);
+            await _inventoryContext.SaveChangesAsync();
 
-                cloth.BrandBrand = brand;
-
-                inventory.Clothes.Add(cloth);
-                inventory.SaveChanges();
-            }
-
-            return View("Index");
+            return RedirectToAction("CreateModel");
         }
 
     }

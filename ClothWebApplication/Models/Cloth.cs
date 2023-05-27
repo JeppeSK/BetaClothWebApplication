@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClothWebApplication.Models;
 
 public partial class Cloth
 {
-    public int Id { get; set; }
+    [Key] public int Id { get; set; }
 
     public string? Color { get; set; }
 
