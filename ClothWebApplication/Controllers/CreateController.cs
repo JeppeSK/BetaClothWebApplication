@@ -1,7 +1,9 @@
 ﻿using ClothWebApplication.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ClothWebApplication.Controllers
 {
@@ -33,33 +35,60 @@ namespace ClothWebApplication.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateModel(CreationViewModel addCloth)
+        public async Task<IActionResult> Index(CreationViewModel ViewModel)
         {
 
-            Brand? brand = (from b in _inventoryContext.Brands
-                           where b.BrandId == Convert.ToInt32(addCloth.SelectedBrand)
-                           select b).FirstOrDefault();
+            InventoryContext inventory = new InventoryContext();
+            var BrandData = inventory.Brands.ToList();
 
-            var cloth = new Cloth()
+            ViewModel.BrandsSelectList = new List<SelectListItem>();
+
+            foreach (var brand in BrandData)
             {
-                Discriminator = addCloth.SelectedModel,
-                Color = addCloth.SelectedColor,
-                Fabric = addCloth.SelectedFabric,
-                HasHood = addCloth.HasHood,
-                Image = addCloth.Image,
-                Size = addCloth.SelectedSize,
-                WaistSize = addCloth.WaistSize,
-                Inventory = addCloth.Inventory,
-                Price = addCloth.Price,
-                BrandBrandId = Convert.ToInt32(addCloth.SelectedBrand),
-                BrandBrand = brand,
-            };
+                ViewModel.BrandsSelectList.Add(new SelectListItem { Text = brand.BrandName, Value = brand.BrandId.ToString() });
+            }
 
-            await _inventoryContext.AddAsync(cloth);
-            await _inventoryContext.SaveChangesAsync();
+            //Appropriate Error Validation Messages
+            //
+            //Price
+            if (ViewModel.Price < 1)
+            {
+                ModelState.AddModelError(nameof(ViewModel.Price), "The price cannot be less than 1");
+            }
 
-            return RedirectToAction("CreateModel");
+            
+        
+            //If Model is valid, create the Model
+            ModelState.Remove("BrandsSelectList");
+            if (ModelState.IsValid)
+            {
+                Brand? brand = (from b in _inventoryContext.Brands
+                                where b.BrandId == Convert.ToInt32(ViewModel.SelectedBrand)
+                                select b).FirstOrDefault();
+
+                var cloth = new Cloth()
+                {
+                    Discriminator = ViewModel.SelectedModel,
+                    Color = ViewModel.SelectedColor,
+                    Fabric = ViewModel.SelectedFabric,
+                    HasHood = ViewModel.HasHood,
+                    Image = ViewModel.Image,
+                    Size = ViewModel.SelectedSize,
+                    WaistSize = ViewModel.WaistSize,
+                    Inventory = ViewModel.Inventory,
+                    Price = ViewModel.Price,
+                    BrandBrandId = Convert.ToInt32(ViewModel.SelectedBrand),
+                    BrandBrand = brand,
+                };
+
+                await _inventoryContext.AddAsync(cloth);
+                await _inventoryContext.SaveChangesAsync();
+
+                return Redirect("/Create");
+            } 
+               
+            return View(ViewModel);
+
         }
-
     }
 }

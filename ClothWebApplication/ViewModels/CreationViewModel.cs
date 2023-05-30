@@ -1,11 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace ClothWebApplication.ViewModels
 {
     public class CreationViewModel
     {
+        [Required]
+        [Range(1, 99999.99)]
         public double Price { get; set; }
+        [Required(ErrorMessage = "This field is required to specify the amount of the desired Model which is in stock")]
+        [Range(1, 1000)]
         public int Inventory { get; set; }
         public bool? HasHood { get; set; }
         public int? WaistSize { get; set; }
@@ -13,14 +19,19 @@ namespace ClothWebApplication.ViewModels
 
 
         public List<SelectListItem> SelectModel { get; set; }
+        [Required(ErrorMessage = "This field is required to specify which Model you want to create.")]
         public string SelectedModel { get; set; }
         public List<SelectListItem> BrandsSelectList { get; set; }
+        [Required(ErrorMessage = "This field is required to specify the Brand of the Model.")]
         public string SelectedBrand { get; set; }
         public List<SelectListItem> SelectSize { get; set; }
+        [Required(ErrorMessage = "This field is required to give the Model an appropriate Size")]
         public string SelectedSize { get; set; }
         public List<SelectListItem> SelectColor { get; set; }
+        [Required(ErrorMessage = "This field is required to specify the Color of the desired Model")]
         public string SelectedColor { get; set; }
         public List<SelectListItem> SelectFabric { get; set; }
+        [Required(ErrorMessage = "This field is requried to specify the Fabric used for the desired Model")]
         public string SelectedFabric { get; set; }
 
         public CreationViewModel()
