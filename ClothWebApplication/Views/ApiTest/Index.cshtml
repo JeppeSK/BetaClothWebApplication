@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>API Testing</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-6">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h5>Test The Different API's!</h5>
+            </div>
+
+            <div class="card-body">
+
+                <div>
+                    <p>This button will return every Model object which is within the database in Json format.</p>
+                    <br />
+                    <button onclick="getAllData()" class="btn btn-primary">Get All</button>
+                </div>
+
+                <br />
+
+                <div>
+                    <p>This button will return a Model Object with the corresponding id from the database in Json format.</p>
+                    <br />
+                    <p>Please specify a decired id</p>
+                    <input class="form-control" type="number" value="" id="id"/>
+                    <br />
+                    <button onclick="getDataWithId()" class="btn btn-primary">Get by Id</button>
+                </div>
+
+                <br />
+
+            </div>
+
+            <div class="card-footer">
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function getAllData() {
+        window.location.href = '/api/cloth/getproducts';
+    }
+    
+    function getDataWithId() {
+        var id = document.getElementById('id').value;
+        window.location.href = '/api/cloth/getproductbyid/' + id;
+    }
+</script>

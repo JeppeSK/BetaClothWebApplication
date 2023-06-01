@@ -56,6 +56,10 @@ namespace ClothWebApplication.Controllers
                 ModelState.AddModelError(nameof(ViewModel.Price), "The price cannot be less than 1");
             }
 
+            if (ViewModel.SelectedModel.ToString().Equals("Pants") && ViewModel.WaistSize < 24 || ViewModel.WaistSize > 41)
+            {
+                ModelState.AddModelError(nameof(ViewModel.WaistSize), "European waist sizes cannot be less than 25 or above 41");
+            }
             
         
             //If Model is valid, create the Model
@@ -66,23 +70,24 @@ namespace ClothWebApplication.Controllers
                                 where b.BrandId == Convert.ToInt32(ViewModel.SelectedBrand)
                                 select b).FirstOrDefault();
 
-                var cloth = new Cloth()
-                {
-                    Discriminator = ViewModel.SelectedModel,
-                    Color = ViewModel.SelectedColor,
-                    Fabric = ViewModel.SelectedFabric,
-                    HasHood = ViewModel.HasHood,
-                    Image = ViewModel.Image,
-                    Size = ViewModel.SelectedSize,
-                    WaistSize = ViewModel.WaistSize,
-                    Inventory = ViewModel.Inventory,
-                    Price = ViewModel.Price,
-                    BrandBrandId = Convert.ToInt32(ViewModel.SelectedBrand),
-                    BrandBrand = brand,
-                };
+                
+                    var cloth = new Cloth()
+                    {
+                        Discriminator = ViewModel.SelectedModel,
+                        Color = ViewModel.SelectedColor,
+                        Fabric = ViewModel.SelectedFabric,
+                        HasHood = false,
+                        Image = ViewModel.Image,
+                        Size = ViewModel.SelectedSize,
+                        WaistSize = ViewModel.WaistSize,
+                        Inventory = ViewModel.Inventory,
+                        Price = ViewModel.Price,
+                        BrandBrandId = Convert.ToInt32(ViewModel.SelectedBrand),
+                        BrandBrand = brand,
+                    };
 
-                await _inventoryContext.AddAsync(cloth);
-                await _inventoryContext.SaveChangesAsync();
+                    await _inventoryContext.AddAsync(cloth);
+                    await _inventoryContext.SaveChangesAsync();
 
                 return Redirect("/Create");
             } 

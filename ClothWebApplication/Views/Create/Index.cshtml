@@ -5,8 +5,8 @@
 @model ClothWebApplication.ViewModels.CreationViewModel
 
 @{
-
- }
+    
+}
 
 <h1>Create</h1>
 
@@ -27,7 +27,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Model</label>
-                        <select asp-for=SelectedModel class="form-select" asp-items="@Model.SelectModel">
+                        <select asp-for=SelectedModel class="form-select" asp-items="@Model.SelectModel" onclick="showOptions()" id="modelOption">
                             <option value="">--Select--</option>
                         </select>
                         <span asp-validation-for="SelectedModel" class="text-danger"></span>
@@ -77,6 +77,20 @@
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
 
+                    <div class="mb-3" style="display: none" id="pantsOption">
+                        <label class="form-label">Waist Size</label>
+                        <input asp-for="WaistSize" type="number" class="form-control"/>
+                        <span asp-validation-for="WaistSize" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3" style="display: none" id="jacketOption">
+                        <label class="form-label">Has Hood</label>
+                        <br />
+                        <input asp-for="HasHood" type="checkbox" class="form-check-input" />
+                        <span asp-validation-for="HasHood" class="text-danger"></span>
+                        <br />
+                    </div>
+
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
@@ -92,3 +106,25 @@
 
     </div>
 </div>
+
+<script>
+    function showOptions() {
+
+        var pantsDiv = document.getElementById("pantsOption");
+        var jacketDiv = document.getElementById("jacketOption");
+        var chosenModel = document.getElementById("modelOption").value;
+
+        if (chosenModel === "Pants"){
+            pantsDiv.style.display = "block";
+            jacketDiv.style.display = "none";
+        } 
+        else if (chosenModel === "Jacket") {
+            jacketDiv.style.display = "block";
+            pantsDiv.style.display = "none";
+        }
+        else {
+            pantsDiv.style.display = "none";
+            jacketDiv.style.display = "none";
+        }
+    }
+</script>

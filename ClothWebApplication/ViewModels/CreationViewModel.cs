@@ -13,35 +13,35 @@ namespace ClothWebApplication.ViewModels
         [Required(ErrorMessage = "This field is required to specify the amount of the desired Model which is in stock")]
         [Range(1, 1000)]
         public int Inventory { get; set; }
-        public bool? HasHood { get; set; }
+        public bool HasHood { get; set; }
+        [Range(24, 41)]
         public int? WaistSize { get; set; }
         public string? Image { get; set; }
 
 
-        public List<SelectListItem> SelectModel { get; set; }
+        public List<SelectListItem>? SelectModel { get; set; }
         [Required(ErrorMessage = "This field is required to specify which Model you want to create.")]
         public string SelectedModel { get; set; }
-        public List<SelectListItem> BrandsSelectList { get; set; }
+        public List<SelectListItem>? BrandsSelectList { get; set; }
         [Required(ErrorMessage = "This field is required to specify the Brand of the Model.")]
-        public string SelectedBrand { get; set; }
+        public string? SelectedBrand { get; set; }
         public List<SelectListItem> SelectSize { get; set; }
         [Required(ErrorMessage = "This field is required to give the Model an appropriate Size")]
-        public string SelectedSize { get; set; }
+        public string? SelectedSize { get; set; }
         public List<SelectListItem> SelectColor { get; set; }
         [Required(ErrorMessage = "This field is required to specify the Color of the desired Model")]
-        public string SelectedColor { get; set; }
+        public string? SelectedColor { get; set; }
         public List<SelectListItem> SelectFabric { get; set; }
         [Required(ErrorMessage = "This field is requried to specify the Fabric used for the desired Model")]
-        public string SelectedFabric { get; set; }
+        public string? SelectedFabric { get; set; }
 
         public CreationViewModel()
         {
             SelectModel = new List<SelectListItem>()
             {
             new SelectListItem { Text="Pants", Value="Pants" },
-            new SelectListItem { Text="Tshirt", Value="Tshirt"},
+            new SelectListItem { Text="Tshirt", Value="T_shirt"},
             new SelectListItem { Text="Jacket", Value="Jacket"},
-            new SelectListItem { Text="Shoes", Value="Shoes"},
             };
 
             SelectSize = new List<SelectListItem>()

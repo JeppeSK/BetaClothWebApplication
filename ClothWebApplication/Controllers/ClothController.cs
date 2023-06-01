@@ -5,6 +5,7 @@ using System.Data.SqlTypes;
 
 namespace ClothWebApplication.Controllers
 {
+    [Route("api/[controller]/[action]/{id}")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class ClothController : ControllerBase
@@ -21,6 +22,19 @@ namespace ClothWebApplication.Controllers
         public async Task<IActionResult> getProducts()
         {
             return Ok(await _context.Clothes.ToListAsync());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> getProductById(int id)
+        {
+            var cloth = await _context.Clothes.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (cloth == null)
+            {
+                return NotFound("The Cloth you are searching for with that id was not found.");
+            }
+
+            return Ok(cloth);
         }
 
         [HttpPost]
