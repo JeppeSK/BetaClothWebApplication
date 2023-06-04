@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClothWebApplication.Controllers
 {
+    [Route("[controller]/[action]/{brandname}")]
+    [Route("[controller]/[action]")]
     public class StoreController : Controller
     {
 
@@ -14,7 +17,7 @@ namespace ClothWebApplication.Controllers
         }
 
         // GET: StoreController1
-        public ActionResult Index()
+        public ActionResult allProducts()
         {
             InventoryContext inventoryContext = new InventoryContext();
 
@@ -24,72 +27,32 @@ namespace ClothWebApplication.Controllers
         }
 
         // GET: StoreController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult brand(string brandname)
         {
+            InventoryContext inventoryContext = new InventoryContext();
+
+            if (brandname.Equals("Nike"))
+            {
+                var brands = inventoryContext.Clothes.Where(x => x.BrandBrandId == 2).ToList();
+                ViewBag.Clothes = brands;
+            }
+            else if (brandname.Equals("Tommy_Hilfinger"))
+            {
+                var brands = inventoryContext.Clothes.Where(x => x.BrandBrandId == 3).ToList();
+                ViewBag.Clothes = brands;
+            } 
+            else if (brandname.Equals("Tiger_Of_Sweden"))
+            {
+                var brands = inventoryContext.Clothes.Where(x => x.BrandBrandId == 1).ToList();
+                ViewBag.Clothes = brands;
+            }
+            else if (brandname.Equals("Les_Deux"))
+            {
+                var brands = inventoryContext.Clothes.Where(x => x.BrandBrandId == 4).ToList();
+                ViewBag.Clothes = brands;
+            }
+
             return View();
-        }
-
-        // GET: StoreController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: StoreController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: StoreController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: StoreController1/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: StoreController1Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: StoreController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

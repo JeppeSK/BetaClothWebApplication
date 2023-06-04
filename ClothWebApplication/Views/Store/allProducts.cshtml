@@ -1,0 +1,98 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/store.css" asp-append-version="true" />
+</head>
+
+<button id="toggleBtn">></button>
+
+<div id="sidebar">
+    <p>Brands</p>
+    <ul>
+        <li>
+            <a id="nike" onclick="getNikeData()">Nike</a>
+        </li>
+        <li>
+            <a id="tommy" onclick="getTommyData()">Tommy_Hilfinger</a>
+        </li>
+        <li>
+            <a id="tiger" onclick="getTigerData()">Tiger_Of_Sweden</a>
+        </li>
+        <li>
+            <a id="les" onclick="getLesData()">Les_Deux</a>
+        </li>
+    </ul>
+</div>
+
+<div class="Cloth-Container">
+@foreach (Cloth cloth in ViewBag.Clothes)
+{
+    if (cloth.Discriminator.Equals("Pants"))
+    {
+        <div class="Container-Item">
+            <img src="~/Images/ClothImages/Pants.png" class="Images" asp-append-version="true" />
+
+            <p>The brand new Comosuit-pants, for only @cloth.Price kr.</p>
+
+            <br />
+        </div>
+    }
+
+    if (cloth.Discriminator.Equals("Jacket"))
+    {
+        <div class="Container-Item">
+            <img src="~/Images/ClothImages/Jacket.png" class="Images" asp-append-version="true" />
+
+            <p>The new @cloth.Fabric jacket, for only @cloth.Price kr.</p>
+
+            <br />
+        </div>
+    }
+
+    if (cloth.Discriminator.Equals("T_shirt"))
+    {
+        <div class="Container-Item">
+            <img src="~/Images/ClothImages/Shirt.png" class="Images" asp-append-version="true" />
+
+            <p>The brand new T-shirt for only @cloth.Price kr.</p>
+
+            <br />
+        </div>
+    }
+}
+</div>
+
+<script>
+    var sidebar = document.getElementById('sidebar');
+    var toggleBtn = document.getElementById('toggleBtn');
+
+    toggleBtn.addEventListener('click', function (e) {
+        sidebar.classList.toggle('open');
+        toggleBtn.style.left = sidebar.classList.contains('open') ? '210px' : '0';
+        toggleBtn.innerHTML = sidebar.classList.contains('open') ? '<' : '>';
+    });
+
+    function getNikeData() {
+        var id = document.getElementById('nike').textContent;
+        window.location.href = '/Store/brand/' + id;
+    }
+
+    function getTommyData() {
+        var id = document.getElementById('tommy').textContent;
+        window.location.href = '/Store/brand/' + id;
+    }
+
+    function getTigerData() {
+        var id = document.getElementById('tiger').textContent;
+        window.location.href = '/Store/brand/' + id;
+    }
+
+    function getLesData() {
+        var id = document.getElementById('les').textContent;
+        window.location.href = '/Store/brand/' + id;
+    }
+</script>

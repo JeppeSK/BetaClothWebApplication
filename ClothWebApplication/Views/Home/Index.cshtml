@@ -2,7 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<head>
+    <link rel="stylesheet" href="~/css/frontpage.css" asp-append-version="true" />
+</head>
+
+<div id="welcome">
+    <h1 class="display-4">AppendStyle</h1>
+    <button id="btn" onclick="loadStore()" class="btn btn-primary">DISCOVER</button>
 </div>
+
+<script>
+    function loadStore() {
+        window.location.href = 'Store/allProducts';
+    }
+</script>

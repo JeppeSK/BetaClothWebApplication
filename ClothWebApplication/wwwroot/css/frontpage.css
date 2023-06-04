@@ -1,0 +1,25 @@
+﻿body {
+    background-image: url("/Images/StockFotos/frontpage.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+footer {
+    background-color: white;
+}
+
+#btn {
+    color: black;
+    background-color: transparent;
+    border: 1px solid InfoText;
+    border-color: black;
+    padding: 5px 10px;
+    outline: none;
+}
+
+#welcome {
+    text-align: left;
+    transform: translateX(70%) translateY(350%);
+    position: absolute;
+}

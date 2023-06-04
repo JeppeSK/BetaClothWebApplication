@@ -1,0 +1,47 @@
+﻿.Cloth-Container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Container-Item {
+    margin: 5px;
+}
+
+.Images {
+    width: 400px;
+    height: 400px;
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: -200px; /* Position the list off-screen initially */
+    width: 200px;
+    height: 100%;
+    background-color: #f1f1f1;
+    padding: 20px;
+    transition: left 0.3s ease-in-out;
+}
+#sidebar.open {
+    left: 0;
+}
+
+#sidebar.open + #toggleBtn:before {
+    content: '<'; /* Adjust the content as needed */
+}
+
+#sidebar.open + #toggleBtn {
+    left: 210px;
+}
+
+#toggleBtn {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: left 0.3s ease-in-out;
+}
+
+a {
+    cursor: pointer;
+}
