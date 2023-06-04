@@ -28,7 +28,6 @@ namespace ClothWebApplication.Controllers
                 ViewModel.BrandsSelectList.Add(new SelectListItem { Text = brand.BrandName, Value = brand.BrandId.ToString() });
             }
 
-
             return View(ViewModel);
         }
 

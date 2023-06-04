@@ -5,7 +5,7 @@
     },
     "mssql1": {
       "type": "mssql",
-      "connectionId": "Server=DESKTOP-QBL2I9C:SQLEXPRESS;Database=Inventory;Trusted_Connection=True;MultipleActiveResultSets=true"
+      "connectionId": "Server=(local)\\SQLEXPRESS;Database=Inventory;Trusted_Connection=True;MultipleActiveResultSets=true"
     }
   }
 }
